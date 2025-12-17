@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Instruments 高级使用技巧 | 邱浩东的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Instruments 是 iOS 开发中最强大的性能分析工具，但很多开发者只用到了皮毛。本文将深入介绍 Instruments 的高级使用技巧，帮助你更精准地定位和解决性能问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instruments 高级使用技巧">
+<meta property="og:url" content="http://example.com/2018/10/20/ios-instruments-advanced/index.html">
+<meta property="og:site_name" content="邱浩东的博客">
+<meta property="og:description" content="Instruments 是 iOS 开发中最强大的性能分析工具，但很多开发者只用到了皮毛。本文将深入介绍 Instruments 的高级使用技巧，帮助你更精准地定位和解决性能问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T10:43:17.339Z">
+<meta property="article:author" content="邱浩东">
+<meta property="article:tag" content="Instruments">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="性能调优">
+<meta property="article:tag" content="调试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="邱浩东的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">邱浩东的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">iOS 开发</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ios-instruments-advanced" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/20/ios-instruments-advanced/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T16:00:00.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Instruments 高级使用技巧
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Instruments 是 iOS 开发中最强大的性能分析工具，但很多开发者只用到了皮毛。本文将深入介绍 Instruments 的高级使用技巧，帮助你更精准地定位和解决性能问题。</p>
+<span id="more"></span>
+
+<h2 id="Instruments-概览"><a href="#Instruments-概览" class="headerlink" title="Instruments 概览"></a>Instruments 概览</h2><p>Instruments 提供了多种分析模板：</p>
+<ul>
+<li><strong>Time Profiler</strong>：CPU 使用分析</li>
+<li><strong>Allocations</strong>：内存分配分析</li>
+<li><strong>Leaks</strong>：内存泄漏检测</li>
+<li><strong>Core Animation</strong>：UI 性能分析</li>
+<li><strong>System Trace</strong>：系统级别追踪</li>
+<li><strong>Network</strong>：网络分析</li>
+<li><strong>Energy Log</strong>：能耗分析</li>
+</ul>
+<h2 id="Time-Profiler-深入"><a href="#Time-Profiler-深入" class="headerlink" title="Time Profiler 深入"></a>Time Profiler 深入</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ol>
+<li>Xcode → Product → Profile (⌘I)</li>
+<li>选择 Time Profiler</li>
+<li>点击录制，执行要分析的操作</li>
+<li>停止录制，分析结果</li>
+</ol>
+<h3 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h3><h4 id="符号化"><a href="#符号化" class="headerlink" title="符号化"></a>符号化</h4><p>确保能看到完整的调用栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在 Instruments 中设置</span><br><span class="line">Call Tree → 勾选以下选项:</span><br><span class="line">✓ Separate by Thread</span><br><span class="line">✓ Invert Call Tree</span><br><span class="line">✓ Hide System Libraries</span><br><span class="line">✓ Flatten Recursion</span><br></pre></td></tr></table></figure>
+
+<h4 id="聚焦特定代码"><a href="#聚焦特定代码" class="headerlink" title="聚焦特定代码"></a>聚焦特定代码</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在代码中添加 signpost 标记</span></span><br><span class="line"><span class="keyword">import</span> os.signpost</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> log <span class="operator">=</span> <span class="type">OSLog</span>(subsystem: <span class="string">&quot;com.example.app&quot;</span>, category: <span class="string">&quot;Performance&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">expensiveOperation</span>() &#123;</span><br><span class="line">    os_signpost(.begin, log: log, name: <span class="string">&quot;Expensive Operation&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 你的代码</span></span><br><span class="line"></span><br><span class="line">    os_signpost(.end, log: log, name: <span class="string">&quot;Expensive Operation&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分析特定时间段"><a href="#分析特定时间段" class="headerlink" title="分析特定时间段"></a>分析特定时间段</h4><p>使用 Time Profiler 的范围选择功能：</p>
+<ol>
+<li>在时间轴上拖动选择要分析的时间范围</li>
+<li>调用树只显示该范围内的数据</li>
+</ol>
+<h3 id="常见问题定位"><a href="#常见问题定位" class="headerlink" title="常见问题定位"></a>常见问题定位</h3><h4 id="主线程阻塞"><a href="#主线程阻塞" class="headerlink" title="主线程阻塞"></a>主线程阻塞</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在 Call Tree 中查找</span><br><span class="line">Main Thread → 找耗时函数</span><br></pre></td></tr></table></figure>
+
+<h4 id="频繁调用的轻量函数"><a href="#频繁调用的轻量函数" class="headerlink" title="频繁调用的轻量函数"></a>频繁调用的轻量函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看 Sample Count</span><br><span class="line">如果某个函数被采样到很多次，即使单次很快也值得关注</span><br></pre></td></tr></table></figure>
+
+<h2 id="Allocations-深入"><a href="#Allocations-深入" class="headerlink" title="Allocations 深入"></a>Allocations 深入</h2><h3 id="Generation-分析"><a href="#Generation-分析" class="headerlink" title="Generation 分析"></a>Generation 分析</h3><p>用于检测内存泄漏和增长：</p>
+<ol>
+<li>点击 “Mark Generation” 按钮</li>
+<li>执行一组操作（如进入某页面再返回）</li>
+<li>再次点击 “Mark Generation”</li>
+<li>分析 Generation 之间的内存增长</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 理想情况</span></span><br><span class="line"><span class="type">Generation</span> <span class="type">A</span> -&gt; <span class="type">Generation</span> <span class="type">B</span>: <span class="number">0</span> 增长（没有泄漏）</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有问题</span></span><br><span class="line"><span class="type">Generation</span> <span class="type">A</span> -&gt; <span class="type">Generation</span> <span class="type">B</span>: 持续增长（可能有泄漏）</span><br></pre></td></tr></table></figure>
+
+<h3 id="追踪特定对象"><a href="#追踪特定对象" class="headerlink" title="追踪特定对象"></a>追踪特定对象</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在 Allocations 中搜索类名</span><br><span class="line">Search: MyViewController</span><br><span class="line"></span><br><span class="line">// 查看所有实例</span><br><span class="line">点击实例 → Extended Detail → 查看创建调用栈</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆栈快照对比"><a href="#堆栈快照对比" class="headerlink" title="堆栈快照对比"></a>堆栈快照对比</h3><ol>
+<li>在某个状态拍摄堆栈快照（Heap Shot）</li>
+<li>执行操作</li>
+<li>再次拍摄快照</li>
+<li>对比两个快照的差异</li>
+</ol>
+<h2 id="Core-Animation-分析"><a href="#Core-Animation-分析" class="headerlink" title="Core Animation 分析"></a>Core Animation 分析</h2><h3 id="检测离屏渲染"><a href="#检测离屏渲染" class="headerlink" title="检测离屏渲染"></a>检测离屏渲染</h3><p>开启调试选项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Debug Options:</span><br><span class="line">✓ Color Blended Layers (红色 = 透明度混合)</span><br><span class="line">✓ Color Offscreen-Rendered Yellow (黄色 = 离屏渲染)</span><br><span class="line">✓ Color Hits Green and Misses Red (缓存命中/未命中)</span><br></pre></td></tr></table></figure>
+
+<h3 id="帧率监控"><a href="#帧率监控" class="headerlink" title="帧率监控"></a>帧率监控</h3><p>关注 FPS 指标：</p>
+<ul>
+<li>绿色：&gt; 45 FPS，流畅</li>
+<li>黄色：30-45 FPS，略有卡顿</li>
+<li>红色：&lt; 30 FPS，明显卡顿</li>
+</ul>
+<h3 id="常见优化"><a href="#常见优化" class="headerlink" title="常见优化"></a>常见优化</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 避免离屏渲染</span></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line">view.layer.cornerRadius <span class="operator">=</span> <span class="number">10</span></span><br><span class="line">view.layer.masksToBounds <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确：预渲染圆角图片</span></span><br><span class="line">imageView.image <span class="operator">=</span> image.roundedCorners(radius: <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 优化阴影</span></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line">view.layer.shadowColor <span class="operator">=</span> <span class="type">UIColor</span>.black.cgColor</span><br><span class="line">view.layer.shadowOpacity <span class="operator">=</span> <span class="number">0.5</span></span><br><span class="line">view.layer.shadowRadius <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="comment">// 系统需要计算阴影路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确：指定阴影路径</span></span><br><span class="line">view.layer.shadowPath <span class="operator">=</span> <span class="type">UIBezierPath</span>(rect: view.bounds).cgPath</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 避免频繁布局</span></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> items &#123;</span><br><span class="line">    <span class="keyword">let</span> label <span class="operator">=</span> <span class="type">UILabel</span>()</span><br><span class="line">    label.frame <span class="operator">=</span> <span class="type">CGRect</span>(<span class="operator">...</span>)</span><br><span class="line">    view.addSubview(label)</span><br><span class="line">    view.layoutIfNeeded()  <span class="comment">// 每次都触发布局</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> items &#123;</span><br><span class="line">    <span class="keyword">let</span> label <span class="operator">=</span> <span class="type">UILabel</span>()</span><br><span class="line">    label.frame <span class="operator">=</span> <span class="type">CGRect</span>(<span class="operator">...</span>)</span><br><span class="line">    view.addSubview(label)</span><br><span class="line">&#125;</span><br><span class="line">view.layoutIfNeeded()  <span class="comment">// 最后统一布局</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="System-Trace"><a href="#System-Trace" class="headerlink" title="System Trace"></a>System Trace</h2><p>System Trace 提供最详细的系统级分析：</p>
+<h3 id="分析线程状态"><a href="#分析线程状态" class="headerlink" title="分析线程状态"></a>分析线程状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">线程状态：</span><br><span class="line">- Running：正在执行</span><br><span class="line">- Blocked：被阻塞（等待锁、I/O等）</span><br><span class="line">- Runnable：可运行但未被调度</span><br><span class="line">- Preempted：被抢占</span><br></pre></td></tr></table></figure>
+
+<h3 id="分析锁竞争"><a href="#分析锁竞争" class="headerlink" title="分析锁竞争"></a>分析锁竞争</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果看到主线程长时间 Blocked</span></span><br><span class="line"><span class="comment">// 检查是否有锁竞争</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：主线程等待锁</span></span><br><span class="line">serialQueue.sync &#123;</span><br><span class="line">    <span class="comment">// 耗时操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确：使用异步</span></span><br><span class="line">serialQueue.async &#123;</span><br><span class="line">    <span class="comment">// 耗时操作</span></span><br><span class="line">    <span class="type">DispatchQueue</span>.main.async &#123;</span><br><span class="line">        <span class="comment">// 更新 UI</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义-Instruments"><a href="#自定义-Instruments" class="headerlink" title="自定义 Instruments"></a>自定义 Instruments</h2><h3 id="使用-os-signpost"><a href="#使用-os-signpost" class="headerlink" title="使用 os_signpost"></a>使用 os_signpost</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.signpost</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ImageLoader</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> log <span class="operator">=</span> <span class="type">OSLog</span>(subsystem: <span class="string">&quot;com.example.app&quot;</span>, category: <span class="string">&quot;ImageLoader&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">loadImage</span>(<span class="params">url</span>: <span class="type">URL</span>, <span class="params">completion</span>: <span class="keyword">@escaping</span> (<span class="type">UIImage</span>?) -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> signpostID <span class="operator">=</span> <span class="type">OSSignpostID</span>(log: log)</span><br><span class="line"></span><br><span class="line">        os_signpost(.begin, log: log, name: <span class="string">&quot;Load Image&quot;</span>, signpostID: signpostID, <span class="string">&quot;URL: %&#123;public&#125;@&quot;</span>, url.absoluteString)</span><br><span class="line"></span><br><span class="line">        <span class="type">URLSession</span>.shared.dataTask(with: url) &#123; data, response, error <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">defer</span> &#123;</span><br><span class="line">                os_signpost(.end, log: log, name: <span class="string">&quot;Load Image&quot;</span>, signpostID: signpostID)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> data &#123;</span><br><span class="line">                <span class="keyword">let</span> image <span class="operator">=</span> <span class="type">UIImage</span>(data: data)</span><br><span class="line">                completion(image)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                completion(<span class="literal">nil</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.resume()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-Instruments-中查看-Signpost"><a href="#在-Instruments-中查看-Signpost" class="headerlink" title="在 Instruments 中查看 Signpost"></a>在 Instruments 中查看 Signpost</h3><ol>
+<li>选择 Blank 模板</li>
+<li>添加 “os_signpost” 工具</li>
+<li>录制并执行相关操作</li>
+<li>在 Points of Interest 中查看标记的事件</li>
+</ol>
+<h2 id="自动化性能测试"><a href="#自动化性能测试" class="headerlink" title="自动化性能测试"></a>自动化性能测试</h2><h3 id="XCTest-性能测试"><a href="#XCTest-性能测试" class="headerlink" title="XCTest 性能测试"></a>XCTest 性能测试</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PerformanceTests</span>: <span class="title class_ inherited__">XCTestCase</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">testImageLoadingPerformance</span>() &#123;</span><br><span class="line">        <span class="keyword">let</span> imageLoader <span class="operator">=</span> <span class="type">ImageLoader</span>()</span><br><span class="line">        <span class="keyword">let</span> url <span class="operator">=</span> <span class="type">URL</span>(string: <span class="string">&quot;https://example.com/image.jpg&quot;</span>)<span class="operator">!</span></span><br><span class="line"></span><br><span class="line">        measure &#123;</span><br><span class="line">            <span class="keyword">let</span> expectation <span class="operator">=</span> <span class="keyword">self</span>.expectation(description: <span class="string">&quot;Load image&quot;</span>)</span><br><span class="line">            imageLoader.loadImage(url: url) &#123; <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">                expectation.fulfill()</span><br><span class="line">            &#125;</span><br><span class="line">            wait(for: [expectation], timeout: <span class="number">10</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">testScrollingPerformance</span>() &#123;</span><br><span class="line">        <span class="keyword">let</span> app <span class="operator">=</span> <span class="type">XCUIApplication</span>()</span><br><span class="line">        app.launch()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> scrollView <span class="operator">=</span> app.scrollViews.firstMatch</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> metrics: [<span class="type">XCTMetric</span>] <span class="operator">=</span> [</span><br><span class="line">            <span class="type">XCTClockMetric</span>(),</span><br><span class="line">            <span class="type">XCTCPUMetric</span>(),</span><br><span class="line">            <span class="type">XCTMemoryMetric</span>(),</span><br><span class="line">            <span class="type">XCTStorageMetric</span>()</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        measure(metrics: metrics) &#123;</span><br><span class="line">            scrollView.swipeUp()</span><br><span class="line">            scrollView.swipeDown()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>有效使用 Instruments 的关键：</p>
+<ol>
+<li><strong>明确目标</strong>：先确定要解决什么问题</li>
+<li><strong>选对工具</strong>：不同问题用不同的模板</li>
+<li><strong>缩小范围</strong>：使用时间范围选择和过滤</li>
+<li><strong>看懂数据</strong>：理解各项指标的含义</li>
+<li><strong>自动化</strong>：将性能测试纳入 CI 流程</li>
+</ol>
+<p>Instruments 是一个需要不断练习才能熟练的工具，建议在日常开发中多使用，逐步积累经验。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/20/ios-instruments-advanced/" data-id="cuidWTTn3ad70FH3Jtd-RksOc" data-title="Instruments 高级使用技巧" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Instruments/" rel="tag">Instruments</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" rel="tag">性能调优</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/20/swift-result-type/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Swift 5 Result 类型：优雅的错误处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/16/ios-gcd-advanced/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">GCD 进阶：队列、线程与死锁详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a><span class="category-list-count">64</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ABI/" rel="tag">ABI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/" rel="tag">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AR/" rel="tag">AR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARKit/" rel="tag">ARKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Actor/" rel="tag">Actor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App-Clips/" rel="tag">App Clips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App-Intents/" rel="tag">App Intents</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Vision-Pro/" rel="tag">Apple Vision Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-Layout/" rel="tag">Auto Layout</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/" rel="tag">Block</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Charts/" rel="tag">Charts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Architecture/" rel="tag">Clean Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Codable/" rel="tag">Codable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Combine/" rel="tag">Combine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Core-Data/" rel="tag">Core Data</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Core-ML/" rel="tag">Core ML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dark-Mode/" rel="tag">Dark Mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drag-and-Drop/" rel="tag">Drag and Drop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extension/" rel="tag">Extension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/" rel="tag">GCD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDFA/" rel="tag">IDFA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Instruments/" rel="tag">Instruments</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVO/" rel="tag">KVO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Macros/" rel="tag">Macros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/" rel="tag">Objective-C</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Observation/" rel="tag">Observation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POP/" rel="tag">POP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RunLoop/" rel="tag">RunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime/" rel="tag">Runtime</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPM/" rel="tag">SPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SceneDelegate/" rel="tag">SceneDelegate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Share/" rel="tag">Share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shortcuts/" rel="tag">Shortcuts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siri/" rel="tag">Siri</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Size-Classes/" rel="tag">Size Classes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/" rel="tag">Swift</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift-6/" rel="tag">Swift 6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift-Testing/" rel="tag">Swift Testing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwiftData/" rel="tag">SwiftData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwiftUI/" rel="tag">SwiftUI</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TipKit/" rel="tag">TipKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIKit/" rel="tag">UIKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/" rel="tag">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UX/" rel="tag">UX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UserNotifications/" rel="tag">UserNotifications</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WWDC/" rel="tag">WWDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Widget/" rel="tag">Widget</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async-await/" rel="tag">async&#x2F;await</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a><span class="tag-list-count">63</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-10/" rel="tag">iOS 10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-11/" rel="tag">iOS 11</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-12/" rel="tag">iOS 12</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-13/" rel="tag">iOS 13</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-14/" rel="tag">iOS 14</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-15/" rel="tag">iOS 15</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-16/" rel="tag">iOS 16</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-17/" rel="tag">iOS 17</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-18/" rel="tag">iOS 18</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iPad/" rel="tag">iPad</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visionOS/" rel="tag">visionOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" rel="tag">依赖管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/" rel="tag">元编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">响应式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86/" rel="tag">团队管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3/" rel="tag">多窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag">导航</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" rel="tag">底层原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4/" rel="tag">快捷指令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" rel="tag">性能调优</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B4%9F%E8%B4%A3%E4%BA%BA/" rel="tag">技术负责人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83/" rel="tag">控制中心</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E9%97%B4%E8%AE%A1%E7%AE%97/" rel="tag">空间计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" rel="tag">组件化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" rel="tag">调试技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB/" rel="tag">迁移</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%82%E9%85%8D/" rel="tag">适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%9F%A5/" rel="tag">通知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" rel="tag">错误处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%90%E7%A7%81/" rel="tag">隐私</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ABI/" style="font-size: 10px;">ABI</a> <a href="/tags/AFNetworking/" style="font-size: 10px;">AFNetworking</a> <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/AR/" style="font-size: 10px;">AR</a> <a href="/tags/ARKit/" style="font-size: 10px;">ARKit</a> <a href="/tags/Actor/" style="font-size: 10px;">Actor</a> <a href="/tags/App-Clips/" style="font-size: 10px;">App Clips</a> <a href="/tags/App-Intents/" style="font-size: 10px;">App Intents</a> <a href="/tags/Apple-Vision-Pro/" style="font-size: 10px;">Apple Vision Pro</a> <a href="/tags/Auto-Layout/" style="font-size: 11.43px;">Auto Layout</a> <a href="/tags/Block/" style="font-size: 11.43px;">Block</a> <a href="/tags/Charts/" style="font-size: 10px;">Charts</a> <a href="/tags/Clean-Architecture/" style="font-size: 10px;">Clean Architecture</a> <a href="/tags/Codable/" style="font-size: 10px;">Codable</a> <a href="/tags/Combine/" style="font-size: 10px;">Combine</a> <a href="/tags/Core-Data/" style="font-size: 10px;">Core Data</a> <a href="/tags/Core-ML/" style="font-size: 11.43px;">Core ML</a> <a href="/tags/Dark-Mode/" style="font-size: 10px;">Dark Mode</a> <a href="/tags/Drag-and-Drop/" style="font-size: 10px;">Drag and Drop</a> <a href="/tags/Extension/" style="font-size: 10px;">Extension</a> <a href="/tags/GCD/" style="font-size: 11.43px;">GCD</a> <a href="/tags/IDFA/" style="font-size: 10px;">IDFA</a> <a href="/tags/Instruments/" style="font-size: 11.43px;">Instruments</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/KVO/" style="font-size: 10px;">KVO</a> <a href="/tags/Macros/" style="font-size: 10px;">Macros</a> <a href="/tags/Objective-C/" style="font-size: 17.14px;">Objective-C</a> <a href="/tags/Observation/" style="font-size: 10px;">Observation</a> <a href="/tags/POP/" style="font-size: 10px;">POP</a> <a href="/tags/RunLoop/" style="font-size: 10px;">RunLoop</a> <a href="/tags/Runtime/" style="font-size: 11.43px;">Runtime</a> <a href="/tags/SPM/" style="font-size: 10px;">SPM</a> <a href="/tags/SceneDelegate/" style="font-size: 10px;">SceneDelegate</a> <a href="/tags/Share/" style="font-size: 10px;">Share</a> <a href="/tags/Shortcuts/" style="font-size: 10px;">Shortcuts</a> <a href="/tags/Siri/" style="font-size: 11.43px;">Siri</a> <a href="/tags/Size-Classes/" style="font-size: 10px;">Size Classes</a> <a href="/tags/Swift/" style="font-size: 18.57px;">Swift</a> <a href="/tags/Swift-6/" style="font-size: 10px;">Swift 6</a> <a href="/tags/Swift-Testing/" style="font-size: 10px;">Swift Testing</a> <a href="/tags/SwiftData/" style="font-size: 10px;">SwiftData</a> <a href="/tags/SwiftUI/" style="font-size: 17.14px;">SwiftUI</a> <a href="/tags/TipKit/" style="font-size: 10px;">TipKit</a> <a href="/tags/UI/" style="font-size: 11.43px;">UI</a> <a href="/tags/UIKit/" style="font-size: 10px;">UIKit</a> <a href="/tags/UITableView/" style="font-size: 10px;">UITableView</a> <a href="/tags/UX/" style="font-size: 10px;">UX</a> <a href="/tags/UserNotifications/" style="font-size: 10px;">UserNotifications</a> <a href="/tags/WWDC/" style="font-size: 10px;">WWDC</a> <a href="/tags/Widget/" style="font-size: 15.71px;">Widget</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS-10/" style="font-size: 10px;">iOS 10</a> <a href="/tags/iOS-11/" style="font-size: 12.86px;">iOS 11</a> <a href="/tags/iOS-12/" style="font-size: 10px;">iOS 12</a> <a href="/tags/iOS-13/" style="font-size: 14.29px;">iOS 13</a> <a href="/tags/iOS-14/" style="font-size: 14.29px;">iOS 14</a> <a href="/tags/iOS-15/" style="font-size: 12.86px;">iOS 15</a> <a href="/tags/iOS-16/" style="font-size: 14.29px;">iOS 16</a> <a href="/tags/iOS-17/" style="font-size: 12.86px;">iOS 17</a> <a href="/tags/iOS-18/" style="font-size: 10px;">iOS 18</a> <a href="/tags/iPad/" style="font-size: 10px;">iPad</a> <a href="/tags/visionOS/" style="font-size: 10px;">visionOS</a> <a href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" style="font-size: 10px;">依赖管理</a> <a href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">元编程</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 10px;">入门</a> <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="font-size: 10px;">内存管理</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">响应式编程</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86/" style="font-size: 10px;">团队管理</a> <a href="/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">多窗口</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 11.43px;">多线程</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 10px;">导航</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 10px;">布局</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 12.86px;">并发</a> <a href="/tags/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" style="font-size: 10px;">底层原理</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4/" style="font-size: 10px;">快捷指令</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 14.29px;">性能优化</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 10px;">性能调优</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B4%9F%E8%B4%A3%E4%BA%BA/" style="font-size: 10px;">技术负责人</a> <a href="/tags/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83/" style="font-size: 10px;">控制中心</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 14.29px;">架构</a> <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 10px;">模块化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E7%A9%BA%E9%97%B4%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">空间计算</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" style="font-size: 10px;">组件化</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">网络编程</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.86px;">设计模式</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 10px;">调试</a> <a href="/tags/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">调试技巧</a> <a href="/tags/%E8%BF%81%E7%A7%BB/" style="font-size: 10px;">迁移</a> <a href="/tags/%E9%80%82%E9%85%8D/" style="font-size: 10px;">适配</a> <a href="/tags/%E9%80%9A%E7%9F%A5/" style="font-size: 11.43px;">通知</a> <a href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" style="font-size: 10px;">错误处理</a> <a href="/tags/%E9%9A%90%E7%A7%81/" style="font-size: 10px;">隐私</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/02/ios-tech-lead-reflections/">一名 iOS 开发 Leader 的思考</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/20/ios-ai-integration/">iOS 应用中的 AI 集成：Core ML 到大语言模型</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/15/swiftui-performance-optimization/">SwiftUI 性能优化深度指南</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/20/ios-clean-architecture/">iOS Clean Architecture 实战：构建可维护的大型应用</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/20/ios-swift-testing/">Swift Testing：下一代测试框架</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 邱浩东<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

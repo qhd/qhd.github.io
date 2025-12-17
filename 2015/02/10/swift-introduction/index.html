@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Swift 语言初探：从 Objective-C 到 Swift | 邱浩东的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="2014 年 WWDC，Apple 发布了全新的编程语言 Swift。作为一个多年的 Objective-C 开发者，我在过去几个月里学习并实践了 Swift。本文分享我对 Swift 的初步认识和学习心得。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 语言初探：从 Objective-C 到 Swift">
+<meta property="og:url" content="http://example.com/2015/02/10/swift-introduction/index.html">
+<meta property="og:site_name" content="邱浩东的博客">
+<meta property="og:description" content="2014 年 WWDC，Apple 发布了全新的编程语言 Swift。作为一个多年的 Objective-C 开发者，我在过去几个月里学习并实践了 Swift。本文分享我对 Swift 的初步认识和学习心得。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-02-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-12T10:18:22.491Z">
+<meta property="article:author" content="邱浩东">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="入门">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="邱浩东的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">邱浩东的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">iOS 开发</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-swift-introduction" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2015/02/10/swift-introduction/" class="article-date">
+  <time class="dt-published" datetime="2015-02-09T16:00:00.000Z" itemprop="datePublished">2015-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Swift 语言初探：从 Objective-C 到 Swift
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>2014 年 WWDC，Apple 发布了全新的编程语言 Swift。作为一个多年的 Objective-C 开发者，我在过去几个月里学习并实践了 Swift。本文分享我对 Swift 的初步认识和学习心得。</p>
+<span id="more"></span>
+
+<h2 id="为什么要学习-Swift"><a href="#为什么要学习-Swift" class="headerlink" title="为什么要学习 Swift"></a>为什么要学习 Swift</h2><p>Apple 明确表示 Swift 是 iOS 和 OS X 开发的未来。虽然目前 Objective-C 仍然是主流，但提前学习 Swift 能够：</p>
+<ol>
+<li>跟上技术发展趋势</li>
+<li>提高开发效率</li>
+<li>编写更安全的代码</li>
+</ol>
+<h2 id="Swift-vs-Objective-C"><a href="#Swift-vs-Objective-C" class="headerlink" title="Swift vs Objective-C"></a>Swift vs Objective-C</h2><h3 id="语法对比"><a href="#语法对比" class="headerlink" title="语法对比"></a>语法对比</h3><p><strong>变量声明</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Swift</span></span><br><span class="line"><span class="keyword">var</span> name <span class="operator">=</span> <span class="string">&quot;张三&quot;</span>          <span class="comment">// 变量</span></span><br><span class="line"><span class="keyword">let</span> age <span class="operator">=</span> <span class="number">25</span>               <span class="comment">// 常量</span></span><br><span class="line"><span class="keyword">var</span> score: <span class="type">Double</span> <span class="operator">=</span> <span class="number">95.5</span>   <span class="comment">// 显式类型声明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Objective-C</span></span><br><span class="line"><span class="type">NSString</span> <span class="operator">*</span>name <span class="operator">=</span> @<span class="string">&quot;张三&quot;</span>;</span><br><span class="line">const <span class="type">NSInteger</span> age <span class="operator">=</span> <span class="number">25</span>;</span><br><span class="line">double score <span class="operator">=</span> <span class="number">95.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数定义</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Swift</span></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">greet</span>(<span class="params">name</span>: <span class="type">String</span>) -&gt; <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Hello, <span class="subst">\(name)</span>!&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Objective-C</span></span><br><span class="line"><span class="operator">-</span> (<span class="type">NSString</span> <span class="operator">*</span>)greetWithName:(<span class="type">NSString</span> <span class="operator">*</span>)name &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="type">NSString</span> stringWithFormat:@<span class="string">&quot;Hello, %@!&quot;</span>, name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>类定义</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Swift - 不需要头文件</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>, <span class="params">age</span>: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name <span class="operator">=</span> name</span><br><span class="line">        <span class="keyword">self</span>.age <span class="operator">=</span> age</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">introduce</span>() -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;我是<span class="subst">\(name)</span>，今年<span class="subst">\(age)</span>岁&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person <span class="operator">=</span> <span class="type">Person</span>(name: <span class="string">&quot;张三&quot;</span>, age: <span class="number">25</span>)</span><br><span class="line"><span class="built_in">print</span>(person.introduce())</span><br></pre></td></tr></table></figure>
+
+<h2 id="Swift-的主要特性"><a href="#Swift-的主要特性" class="headerlink" title="Swift 的主要特性"></a>Swift 的主要特性</h2><h3 id="1-类型安全"><a href="#1-类型安全" class="headerlink" title="1. 类型安全"></a>1. 类型安全</h3><p>Swift 是类型安全的语言，编译器会检查类型错误：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="comment">// number = &quot;hello&quot;  // 编译错误！不能将 String 赋值给 Int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 类型转换必须显式进行</span></span><br><span class="line"><span class="keyword">let</span> intValue <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">let</span> doubleValue <span class="operator">=</span> <span class="type">Double</span>(intValue)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Optional（可选类型）"><a href="#2-Optional（可选类型）" class="headerlink" title="2. Optional（可选类型）"></a>2. Optional（可选类型）</h3><p>Optional 是 Swift 最重要的特性之一，用于处理值可能为空的情况：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> optionalString: <span class="type">String</span>? <span class="operator">=</span> <span class="string">&quot;Hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 强制解包（不安全）</span></span><br><span class="line"><span class="built_in">print</span>(optionalString<span class="operator">!</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选绑定（推荐）</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> string <span class="operator">=</span> optionalString &#123;</span><br><span class="line">    <span class="built_in">print</span>(string)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Optional chaining</span></span><br><span class="line"><span class="keyword">let</span> length <span class="operator">=</span> optionalString<span class="operator">?</span>.count  <span class="comment">// length 类型是 Int?</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-字符串插值"><a href="#3-字符串插值" class="headerlink" title="3. 字符串插值"></a>3. 字符串插值</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name <span class="operator">=</span> <span class="string">&quot;Swift&quot;</span></span><br><span class="line"><span class="keyword">let</span> version <span class="operator">=</span> <span class="number">1.2</span></span><br><span class="line"><span class="keyword">let</span> message <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(name)</span> 版本 <span class="subst">\(version)</span> 太棒了！&quot;</span></span><br><span class="line"><span class="comment">// 输出: Swift 版本 1.2 太棒了！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-闭包（Closures）"><a href="#4-闭包（Closures）" class="headerlink" title="4. 闭包（Closures）"></a>4. 闭包（Closures）</h3><p>Swift 的闭包类似于 Objective-C 的 Block，但语法更简洁：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完整语法</span></span><br><span class="line"><span class="keyword">let</span> numbers <span class="operator">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">let</span> doubled <span class="operator">=</span> numbers.map(&#123; (number: <span class="type">Int</span>) -&gt; <span class="type">Int</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> number <span class="operator">*</span> <span class="number">2</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简化语法</span></span><br><span class="line"><span class="keyword">let</span> doubled2 <span class="operator">=</span> numbers.map &#123; <span class="variable">$0</span> <span class="operator">*</span> <span class="number">2</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(doubled)  <span class="comment">// [2, 4, 6, 8, 10]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-枚举增强"><a href="#5-枚举增强" class="headerlink" title="5. 枚举增强"></a>5. 枚举增强</h3><p>Swift 的枚举比 C&#x2F;Objective-C 强大得多：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">NetworkResult</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> success(data: <span class="type">NSData</span>)</span><br><span class="line">    <span class="keyword">case</span> failure(error: <span class="type">NSError</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">handleResult</span>(<span class="params">result</span>: <span class="type">NetworkResult</span>) &#123;</span><br><span class="line">    <span class="keyword">switch</span> result &#123;</span><br><span class="line">    <span class="keyword">case</span> .success(<span class="keyword">let</span> data):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;成功，数据大小: <span class="subst">\(data.length)</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> .failure(<span class="keyword">let</span> error):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;失败: <span class="subst">\(error.localizedDescription)</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-结构体的值类型"><a href="#6-结构体的值类型" class="headerlink" title="6. 结构体的值类型"></a>6. 结构体的值类型</h3><p>Swift 的结构体是值类型，赋值时会复制：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> x: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">var</span> y: <span class="type">Double</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> point1 <span class="operator">=</span> <span class="type">Point</span>(x: <span class="number">10</span>, y: <span class="number">20</span>)</span><br><span class="line"><span class="keyword">var</span> point2 <span class="operator">=</span> point1  <span class="comment">// 复制</span></span><br><span class="line">point2.x <span class="operator">=</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(point1.x)  <span class="comment">// 10，不受影响</span></span><br><span class="line"><span class="built_in">print</span>(point2.x)  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="与-Objective-C-混编"><a href="#与-Objective-C-混编" class="headerlink" title="与 Objective-C 混编"></a>与 Objective-C 混编</h2><p>Swift 和 Objective-C 可以在同一个项目中共存：</p>
+<h3 id="在-Swift-中使用-Objective-C"><a href="#在-Swift-中使用-Objective-C" class="headerlink" title="在 Swift 中使用 Objective-C"></a>在 Swift 中使用 Objective-C</h3><p>创建 Bridging Header 文件（<code>项目名-Bridging-Header.h</code>）：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyProject-Bridging-Header.h</span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;MyObjCClass.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以在 Swift 中直接使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj <span class="operator">=</span> <span class="type">MyObjCClass</span>()</span><br><span class="line">obj.doSomething()</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-Objective-C-中使用-Swift"><a href="#在-Objective-C-中使用-Swift" class="headerlink" title="在 Objective-C 中使用 Swift"></a>在 Objective-C 中使用 Swift</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入自动生成的头文件</span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;MyProject-Swift.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Swift 类</span></span><br><span class="line">MySwiftClass *swiftObj = [[MySwiftClass alloc] init];</span><br></pre></td></tr></table></figure>
+
+<h2 id="学习建议"><a href="#学习建议" class="headerlink" title="学习建议"></a>学习建议</h2><p>作为 Objective-C 开发者，学习 Swift 的建议：</p>
+<ol>
+<li><strong>先理解概念</strong>：Optional、值类型 vs 引用类型、协议扩展等</li>
+<li><strong>动手实践</strong>：在 Playground 中试验代码</li>
+<li><strong>渐进式迁移</strong>：新功能用 Swift 写，旧代码逐步迁移</li>
+<li><strong>阅读官方文档</strong>：《The Swift Programming Language》是最好的学习资料</li>
+</ol>
+<h2 id="当前限制"><a href="#当前限制" class="headerlink" title="当前限制"></a>当前限制</h2><p>Swift 1.x 还有一些不足：</p>
+<ul>
+<li>编译速度较慢</li>
+<li>ABI 不稳定，每个版本都有较大变化</li>
+<li>部分特性还不完善</li>
+<li>第三方库支持有限</li>
+</ul>
+<p>但这些问题相信会在后续版本中逐步解决。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Swift 是一门现代化的编程语言，它结合了多种语言的优秀特性。虽然目前还在快速迭代中，但作为 iOS 开发者，学习 Swift 是必然的趋势。建议大家在保持 Objective-C 能力的同时，开始学习和实践 Swift。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2015/02/10/swift-introduction/" data-id="cuidoO1V1j2xL8Bsr9JdTBBKl" data-title="Swift 语言初探：从 Objective-C 到 Swift" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/" rel="tag">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/18/ios-autolayout-guide/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Auto Layout 实战指南：告别 Frame 布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/25/ios-uitableview-optimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">UITableView 性能优化实战</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a><span class="category-list-count">64</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ABI/" rel="tag">ABI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/" rel="tag">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AR/" rel="tag">AR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARKit/" rel="tag">ARKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Actor/" rel="tag">Actor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App-Clips/" rel="tag">App Clips</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App-Intents/" rel="tag">App Intents</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Vision-Pro/" rel="tag">Apple Vision Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-Layout/" rel="tag">Auto Layout</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/" rel="tag">Block</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Charts/" rel="tag">Charts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Architecture/" rel="tag">Clean Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Codable/" rel="tag">Codable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Combine/" rel="tag">Combine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Core-Data/" rel="tag">Core Data</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Core-ML/" rel="tag">Core ML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dark-Mode/" rel="tag">Dark Mode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drag-and-Drop/" rel="tag">Drag and Drop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extension/" rel="tag">Extension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCD/" rel="tag">GCD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDFA/" rel="tag">IDFA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Instruments/" rel="tag">Instruments</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVO/" rel="tag">KVO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Macros/" rel="tag">Macros</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/" rel="tag">Objective-C</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Observation/" rel="tag">Observation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POP/" rel="tag">POP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RunLoop/" rel="tag">RunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime/" rel="tag">Runtime</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPM/" rel="tag">SPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SceneDelegate/" rel="tag">SceneDelegate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Share/" rel="tag">Share</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shortcuts/" rel="tag">Shortcuts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Siri/" rel="tag">Siri</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Size-Classes/" rel="tag">Size Classes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/" rel="tag">Swift</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift-6/" rel="tag">Swift 6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift-Testing/" rel="tag">Swift Testing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwiftData/" rel="tag">SwiftData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwiftUI/" rel="tag">SwiftUI</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TipKit/" rel="tag">TipKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIKit/" rel="tag">UIKit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/" rel="tag">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UX/" rel="tag">UX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UserNotifications/" rel="tag">UserNotifications</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WWDC/" rel="tag">WWDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Widget/" rel="tag">Widget</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async-await/" rel="tag">async&#x2F;await</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a><span class="tag-list-count">63</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-10/" rel="tag">iOS 10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-11/" rel="tag">iOS 11</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-12/" rel="tag">iOS 12</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-13/" rel="tag">iOS 13</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-14/" rel="tag">iOS 14</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-15/" rel="tag">iOS 15</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-16/" rel="tag">iOS 16</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-17/" rel="tag">iOS 17</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-18/" rel="tag">iOS 18</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iPad/" rel="tag">iPad</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visionOS/" rel="tag">visionOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" rel="tag">依赖管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/" rel="tag">元编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">响应式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86/" rel="tag">团队管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3/" rel="tag">多窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag">导航</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" rel="tag">底层原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4/" rel="tag">快捷指令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" rel="tag">性能调优</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B4%9F%E8%B4%A3%E4%BA%BA/" rel="tag">技术负责人</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83/" rel="tag">控制中心</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E9%97%B4%E8%AE%A1%E7%AE%97/" rel="tag">空间计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" rel="tag">组件化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" rel="tag">调试技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB/" rel="tag">迁移</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%82%E9%85%8D/" rel="tag">适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%9F%A5/" rel="tag">通知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" rel="tag">错误处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%90%E7%A7%81/" rel="tag">隐私</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ABI/" style="font-size: 10px;">ABI</a> <a href="/tags/AFNetworking/" style="font-size: 10px;">AFNetworking</a> <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/AR/" style="font-size: 10px;">AR</a> <a href="/tags/ARKit/" style="font-size: 10px;">ARKit</a> <a href="/tags/Actor/" style="font-size: 10px;">Actor</a> <a href="/tags/App-Clips/" style="font-size: 10px;">App Clips</a> <a href="/tags/App-Intents/" style="font-size: 10px;">App Intents</a> <a href="/tags/Apple-Vision-Pro/" style="font-size: 10px;">Apple Vision Pro</a> <a href="/tags/Auto-Layout/" style="font-size: 11.43px;">Auto Layout</a> <a href="/tags/Block/" style="font-size: 11.43px;">Block</a> <a href="/tags/Charts/" style="font-size: 10px;">Charts</a> <a href="/tags/Clean-Architecture/" style="font-size: 10px;">Clean Architecture</a> <a href="/tags/Codable/" style="font-size: 10px;">Codable</a> <a href="/tags/Combine/" style="font-size: 10px;">Combine</a> <a href="/tags/Core-Data/" style="font-size: 10px;">Core Data</a> <a href="/tags/Core-ML/" style="font-size: 11.43px;">Core ML</a> <a href="/tags/Dark-Mode/" style="font-size: 10px;">Dark Mode</a> <a href="/tags/Drag-and-Drop/" style="font-size: 10px;">Drag and Drop</a> <a href="/tags/Extension/" style="font-size: 10px;">Extension</a> <a href="/tags/GCD/" style="font-size: 11.43px;">GCD</a> <a href="/tags/IDFA/" style="font-size: 10px;">IDFA</a> <a href="/tags/Instruments/" style="font-size: 11.43px;">Instruments</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/KVO/" style="font-size: 10px;">KVO</a> <a href="/tags/Macros/" style="font-size: 10px;">Macros</a> <a href="/tags/Objective-C/" style="font-size: 17.14px;">Objective-C</a> <a href="/tags/Observation/" style="font-size: 10px;">Observation</a> <a href="/tags/POP/" style="font-size: 10px;">POP</a> <a href="/tags/RunLoop/" style="font-size: 10px;">RunLoop</a> <a href="/tags/Runtime/" style="font-size: 11.43px;">Runtime</a> <a href="/tags/SPM/" style="font-size: 10px;">SPM</a> <a href="/tags/SceneDelegate/" style="font-size: 10px;">SceneDelegate</a> <a href="/tags/Share/" style="font-size: 10px;">Share</a> <a href="/tags/Shortcuts/" style="font-size: 10px;">Shortcuts</a> <a href="/tags/Siri/" style="font-size: 11.43px;">Siri</a> <a href="/tags/Size-Classes/" style="font-size: 10px;">Size Classes</a> <a href="/tags/Swift/" style="font-size: 18.57px;">Swift</a> <a href="/tags/Swift-6/" style="font-size: 10px;">Swift 6</a> <a href="/tags/Swift-Testing/" style="font-size: 10px;">Swift Testing</a> <a href="/tags/SwiftData/" style="font-size: 10px;">SwiftData</a> <a href="/tags/SwiftUI/" style="font-size: 17.14px;">SwiftUI</a> <a href="/tags/TipKit/" style="font-size: 10px;">TipKit</a> <a href="/tags/UI/" style="font-size: 11.43px;">UI</a> <a href="/tags/UIKit/" style="font-size: 10px;">UIKit</a> <a href="/tags/UITableView/" style="font-size: 10px;">UITableView</a> <a href="/tags/UX/" style="font-size: 10px;">UX</a> <a href="/tags/UserNotifications/" style="font-size: 10px;">UserNotifications</a> <a href="/tags/WWDC/" style="font-size: 10px;">WWDC</a> <a href="/tags/Widget/" style="font-size: 15.71px;">Widget</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS-10/" style="font-size: 10px;">iOS 10</a> <a href="/tags/iOS-11/" style="font-size: 12.86px;">iOS 11</a> <a href="/tags/iOS-12/" style="font-size: 10px;">iOS 12</a> <a href="/tags/iOS-13/" style="font-size: 14.29px;">iOS 13</a> <a href="/tags/iOS-14/" style="font-size: 14.29px;">iOS 14</a> <a href="/tags/iOS-15/" style="font-size: 12.86px;">iOS 15</a> <a href="/tags/iOS-16/" style="font-size: 14.29px;">iOS 16</a> <a href="/tags/iOS-17/" style="font-size: 12.86px;">iOS 17</a> <a href="/tags/iOS-18/" style="font-size: 10px;">iOS 18</a> <a href="/tags/iPad/" style="font-size: 10px;">iPad</a> <a href="/tags/visionOS/" style="font-size: 10px;">visionOS</a> <a href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" style="font-size: 10px;">依赖管理</a> <a href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">元编程</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 10px;">入门</a> <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="font-size: 10px;">内存管理</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">响应式编程</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86/" style="font-size: 10px;">团队管理</a> <a href="/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">多窗口</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 11.43px;">多线程</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 10px;">导航</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 10px;">布局</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 12.86px;">并发</a> <a href="/tags/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" style="font-size: 10px;">底层原理</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4/" style="font-size: 10px;">快捷指令</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 14.29px;">性能优化</a> <a href="/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" style="font-size: 10px;">性能调优</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B4%9F%E8%B4%A3%E4%BA%BA/" style="font-size: 10px;">技术负责人</a> <a href="/tags/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83/" style="font-size: 10px;">控制中心</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 14.29px;">架构</a> <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 10px;">模块化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E7%A9%BA%E9%97%B4%E8%AE%A1%E7%AE%97/" style="font-size: 10px;">空间计算</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" style="font-size: 10px;">组件化</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">网络编程</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12.86px;">设计模式</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 10px;">调试</a> <a href="/tags/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">调试技巧</a> <a href="/tags/%E8%BF%81%E7%A7%BB/" style="font-size: 10px;">迁移</a> <a href="/tags/%E9%80%82%E9%85%8D/" style="font-size: 10px;">适配</a> <a href="/tags/%E9%80%9A%E7%9F%A5/" style="font-size: 11.43px;">通知</a> <a href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" style="font-size: 10px;">错误处理</a> <a href="/tags/%E9%9A%90%E7%A7%81/" style="font-size: 10px;">隐私</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/02/ios-tech-lead-reflections/">一名 iOS 开发 Leader 的思考</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/20/ios-ai-integration/">iOS 应用中的 AI 集成：Core ML 到大语言模型</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/15/swiftui-performance-optimization/">SwiftUI 性能优化深度指南</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/20/ios-clean-architecture/">iOS Clean Architecture 实战：构建可维护的大型应用</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/20/ios-swift-testing/">Swift Testing：下一代测试框架</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 邱浩东<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
